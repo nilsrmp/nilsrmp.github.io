@@ -48,14 +48,25 @@ button {
   background: #f6f6f3;
 }
 
+.access-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 108px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .magnetic-button {
   position: relative;
   display: inline-flex;
-  min-width: 190px;
+  min-width: 228px;
+  min-height: 70px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 21px 42px;
+  padding: 25px 50px;
   border: 1px solid rgba(23, 23, 23, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.88);
@@ -88,103 +99,63 @@ button {
   font-weight: 500;
 }
 
-.access-layer {
-  position: fixed;
-  z-index: 10;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: rgba(246, 246, 243, 0.72);
-  backdrop-filter: blur(18px);
-}
-
-.access-dialog {
-  position: relative;
-  width: min(100%, 390px);
-  padding: 38px;
+.access-form {
+  display: flex;
+  width: min(340px, calc(100vw - 40px));
+  min-height: 70px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 25px;
   border: 1px solid rgba(23, 23, 23, 0.1);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 30px 90px rgba(23, 23, 23, 0.11);
-  text-align: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 35px rgba(25, 25, 25, 0.08);
+  backdrop-filter: blur(12px);
 }
 
-.dialog-close {
-  position: absolute;
-  top: 15px;
-  right: 16px;
+.access-form:focus-within {
+  border-color: rgba(23, 23, 23, 0.22);
+  box-shadow: 0 14px 42px rgba(25, 25, 25, 0.1);
+}
+
+.access-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #171717;
+  font-size: 18px;
+  letter-spacing: 0.22em;
+}
+
+.access-form input::placeholder {
+  color: #858581;
+  opacity: 1;
+}
+
+.access-form button {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: transparent;
-  color: #858585;
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-}
-
-.dialog-close:hover,
-.dialog-close:focus-visible {
-  background: #f1f1ee;
-  color: #171717;
-}
-
-.access-kicker {
-  margin: 0 0 9px;
-  color: #92928e;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.access-dialog h1 {
-  margin: 0 0 28px;
-  font-size: clamp(28px, 5vw, 34px);
-  font-weight: 500;
-  letter-spacing: -0.045em;
-}
-
-.access-dialog form {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-}
-
-.access-dialog input {
-  min-width: 0;
-  padding: 14px 16px;
-  border: 1px solid rgba(23, 23, 23, 0.12);
-  border-radius: 14px;
-  outline: none;
-  background: #f7f7f4;
-  color: #171717;
-  letter-spacing: 0.18em;
-}
-
-.access-dialog input:focus {
-  border-color: rgba(23, 23, 23, 0.35);
-  background: #ffffff;
-}
-
-.access-dialog form button {
-  padding: 0 18px;
-  border: 0;
-  border-radius: 14px;
   background: #171717;
   color: #ffffff;
   cursor: not-allowed;
-  opacity: 0.35;
+  font-size: 19px;
+  opacity: 0.3;
 }
 
 .access-note {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
   color: #9a9a95;
   font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.01em;
 }
 
 .sr-only {
@@ -201,20 +172,19 @@ button {
 
 @media (max-width: 480px) {
   .magnetic-button {
-    min-width: 170px;
-    padding: 19px 36px;
+    min-width: 204px;
+    min-height: 64px;
+    padding: 22px 43px;
   }
 
-  .access-dialog {
-    padding: 34px 22px 26px;
-    border-radius: 24px;
+  .access-form {
+    min-height: 64px;
+    padding: 7px 7px 7px 21px;
   }
 
-  .access-dialog form {
-    grid-template-columns: 1fr;
-  }
-
-  .access-dialog form button {
-    min-height: 48px;
+  .access-form button {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
   }
 }

@@ -85,11 +85,13 @@ export default function MagneticButton({ label, onClick }: MagneticButtonProps) 
   return (
     <motion.button
       ref={ref}
+      layoutId="access-control"
       type="button"
       className="magnetic-button"
       style={{ x: springX, y: springY }}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 330, damping: 28 }}
     >
       <motion.span
         className="magnetic-sweep"

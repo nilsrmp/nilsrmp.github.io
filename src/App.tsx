@@ -25,45 +25,30 @@ export default function App() {
 
   return (
     <main className="landing-shell">
-      <BackgroundPattern spotlight={150} className="landing-pattern">
-        <MagneticButton label="nilsrump" onClick={() => setIsAccessOpen(true)} />
-      </BackgroundPattern>
-
-      <AnimatePresence>
-        {isAccessOpen && (
-          <motion.div
-            className="access-layer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onMouseDown={(event) => {
-              if (event.target === event.currentTarget) setIsAccessOpen(false);
-            }}
-          >
-            <motion.section
-              className="access-dialog"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="access-title"
-              initial={{ opacity: 0, scale: 0.96, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.98, y: 6 }}
-              transition={{ type: "spring", stiffness: 360, damping: 30 }}
-            >
-              <button
-                className="dialog-close"
-                type="button"
-                aria-label="Dialog schließen"
-                onClick={() => setIsAccessOpen(false)}
+      <BackgroundPattern
+        spotlight={150}
+        className="landing-pattern"
+        onPointerDown={(event) => {
+          if (event.target === event.currentTarget) setIsAccessOpen(false);
+        }}
+      >
+        <div className="access-stage">
+          <AnimatePresence initial={false} mode="popLayout">
+            {!isAccessOpen ? (
+              <MagneticButton
+                key="button"
+                label="nilsrump"
+                onClick={() => setIsAccessOpen(true)}
+              />
+            ) : (
+              <motion.form
+                key="input"
+                layoutId="access-control"
+                className="access-form"
+                aria-label="Zugangscode eingeben"
+                onSubmit={handleSubmit}
+                transition={{ type: "spring", stiffness: 330, damping: 28 }}
               >
-                ×
-              </button>
-
-              <p className="access-kicker">private access</p>
-              <h1 id="access-title">Enter code</h1>
-
-              <form onSubmit={handleSubmit}>
                 <label className="sr-only" htmlFor="access-code">
                   Zugangscode
                 </label>
@@ -77,18 +62,18 @@ export default function App() {
                   placeholder="••••••"
                   aria-describedby="access-note"
                 />
-                <button type="submit" disabled aria-disabled="true">
-                  Enter
+                <button type="submit" aria-label="Code senden" disabled>
+                  <span aria-hidden="true">→</span>
                 </button>
-              </form>
+              </motion.form>
+            )}
+          </AnimatePresence>
 
-              <p id="access-note" className="access-note">
-                Access opens soon.
-              </p>
-            </motion.section>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <p id="access-note" className="access-note">
+            Access opens soon.
+          </p>
+        </div>
+      </BackgroundPattern>
     </main>
   );
 }
