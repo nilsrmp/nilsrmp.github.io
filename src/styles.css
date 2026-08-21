@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap");
+
+:root {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: #171717;
+  background: #f6f6f3;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.landing-shell,
+.landing-pattern {
+  width: 100%;
+  min-height: 100svh;
+}
+
+.landing-shell {
+  overflow: hidden;
+  background: #f6f6f3;
+}
+
+.landing-pattern {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f6f6f3;
+}
+
+.magnetic-button {
+  position: relative;
+  display: inline-flex;
+  min-width: 190px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 21px 42px;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 35px rgba(25, 25, 25, 0.08);
+  color: #171717;
+  cursor: pointer;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  backdrop-filter: blur(12px);
+  will-change: transform;
+}
+
+.magnetic-button:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 5px;
+}
+
+.magnetic-sweep {
+  position: absolute;
+  border-radius: 50%;
+  background: #171717;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.magnetic-label {
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.access-layer {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(246, 246, 243, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.access-dialog {
+  position: relative;
+  width: min(100%, 390px);
+  padding: 38px;
+  border: 1px solid rgba(23, 23, 23, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 30px 90px rgba(23, 23, 23, 0.11);
+  text-align: center;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #858585;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dialog-close:hover,
+.dialog-close:focus-visible {
+  background: #f1f1ee;
+  color: #171717;
+}
+
+.access-kicker {
+  margin: 0 0 9px;
+  color: #92928e;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.access-dialog h1 {
+  margin: 0 0 28px;
+  font-size: clamp(28px, 5vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.access-dialog form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.access-dialog input {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  border-radius: 14px;
+  outline: none;
+  background: #f7f7f4;
+  color: #171717;
+  letter-spacing: 0.18em;
+}
+
+.access-dialog input:focus {
+  border-color: rgba(23, 23, 23, 0.35);
+  background: #ffffff;
+}
+
+.access-dialog form button {
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  background: #171717;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.access-note {
+  margin: 16px 0 0;
+  color: #9a9a95;
+  font-size: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 480px) {
+  .magnetic-button {
+    min-width: 170px;
+    padding: 19px 36px;
+  }
+
+  .access-dialog {
+    padding: 34px 22px 26px;
+    border-radius: 24px;
+  }
+
+  .access-dialog form {
+    grid-template-columns: 1fr;
+  }
+
+  .access-dialog form button {
+    min-height: 48px;
+  }
+}
