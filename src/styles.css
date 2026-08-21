@@ -58,30 +58,45 @@ button {
   justify-content: flex-start;
 }
 
-.magnetic-button {
+.magnetic-control {
   position: relative;
-  display: inline-flex;
-  min-width: 228px;
-  min-height: 70px;
-  align-items: center;
-  justify-content: center;
+  width: 228px;
+  height: 70px;
   overflow: hidden;
-  padding: 25px 50px;
   border: 1px solid rgba(23, 23, 23, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.88);
   box-shadow: 0 10px 35px rgba(25, 25, 25, 0.08);
-  color: #171717;
-  cursor: pointer;
-  letter-spacing: -0.025em;
-  line-height: 1;
   backdrop-filter: blur(12px);
   will-change: transform;
 }
 
-.magnetic-button:focus-visible {
+.magnetic-control:focus-within {
+  border-color: rgba(23, 23, 23, 0.22);
+  box-shadow: 0 14px 42px rgba(25, 25, 25, 0.1);
+}
+
+.magnetic-trigger {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: #171717;
+  cursor: pointer;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.magnetic-trigger:focus-visible {
   outline: 2px solid #171717;
-  outline-offset: 5px;
+  outline-offset: -5px;
 }
 
 .magnetic-sweep {
@@ -100,22 +115,14 @@ button {
 }
 
 .access-form {
+  position: absolute;
+  inset: 0;
   display: flex;
-  width: min(340px, calc(100vw - 40px));
-  min-height: 70px;
+  width: 100%;
+  height: 100%;
   align-items: center;
   gap: 8px;
-  padding: 8px 8px 8px 25px;
-  border: 1px solid rgba(23, 23, 23, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 35px rgba(25, 25, 25, 0.08);
-  backdrop-filter: blur(12px);
-}
-
-.access-form:focus-within {
-  border-color: rgba(23, 23, 23, 0.22);
-  box-shadow: 0 14px 42px rgba(25, 25, 25, 0.1);
+  padding: 8px 8px 8px 23px;
 }
 
 .access-form input {
@@ -137,9 +144,9 @@ button {
 
 .access-form button {
   display: grid;
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
   place-items: center;
   border: 0;
   border-radius: 50%;
@@ -171,14 +178,12 @@ button {
 }
 
 @media (max-width: 480px) {
-  .magnetic-button {
-    min-width: 204px;
-    min-height: 64px;
-    padding: 22px 43px;
+  .magnetic-control {
+    width: 204px;
+    height: 64px;
   }
 
   .access-form {
-    min-height: 64px;
     padding: 7px 7px 7px 21px;
   }
 

@@ -1,5 +1,4 @@
 import { BackgroundPattern } from "@appica/ui-react/background-pattern";
-import { AnimatePresence, motion } from "motion/react";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import MagneticButton from "./components/MagneticButton";
 
@@ -29,45 +28,18 @@ export default function App() {
         spotlight={150}
         className="landing-pattern"
         onPointerDown={(event) => {
-          if (event.target === event.currentTarget) setIsAccessOpen(false);
+          const target = event.target as Element;
+          if (!target.closest(".magnetic-control")) setIsAccessOpen(false);
         }}
       >
         <div className="access-stage">
-          <AnimatePresence initial={false} mode="popLayout">
-            {!isAccessOpen ? (
-              <MagneticButton
-                key="button"
-                label="nilsrump"
-                onClick={() => setIsAccessOpen(true)}
-              />
-            ) : (
-              <motion.form
-                key="input"
-                layoutId="access-control"
-                className="access-form"
-                aria-label="Zugangscode eingeben"
-                onSubmit={handleSubmit}
-                transition={{ type: "spring", stiffness: 330, damping: 28 }}
-              >
-                <label className="sr-only" htmlFor="access-code">
-                  Zugangscode
-                </label>
-                <input
-                  ref={inputRef}
-                  id="access-code"
-                  name="access-code"
-                  type="password"
-                  inputMode="text"
-                  autoComplete="one-time-code"
-                  placeholder="••••••"
-                  aria-describedby="access-note"
-                />
-                <button type="submit" aria-label="Code senden" disabled>
-                  <span aria-hidden="true">→</span>
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
+          <MagneticButton
+            label="nilsrump"
+            isAccessOpen={isAccessOpen}
+            inputRef={inputRef}
+            onOpen={() => setIsAccessOpen(true)}
+            onSubmit={handleSubmit}
+          />
 
           <p id="access-note" className="access-note">
             Access opens soon.
