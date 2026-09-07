@@ -1,11 +1,11 @@
-import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import {
-  FormEvent,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "motion/react";
+import { FormEvent, RefObject, useEffect, useRef, useState } from "react";
 
 const RANGE_PER_POINT = 18;
 const MAX_PULL = 0.5;
@@ -25,6 +25,7 @@ export default function MagneticButton({
   onOpen,
   onSubmit,
 }: MagneticButtonProps) {
+  const reducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   const [origin, setOrigin] = useState({ x: 0, y: 0, diameter: 0 });
@@ -37,6 +38,12 @@ export default function MagneticButton({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (isAccessOpen || reducedMotion) {
+      x.set(0);
+      y.set(0);
+      setHover(false);
+      return;
+    }
     const control = node;
 
     const magnet = 10;
@@ -44,6 +51,7 @@ export default function MagneticButton({
     const reach = magnet * RANGE_PER_POINT;
 
     function onMove(event: PointerEvent) {
+      if (event.pointerType !== "mouse") return;
       const rect = control.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2 - springX.get();
       const centerY = rect.top + rect.height / 2 - springY.get();
@@ -60,8 +68,14 @@ export default function MagneticButton({
       const gap = Math.hypot(edgeX, edgeY);
 
       if (inside !== hoverRef.current) {
-        const localX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-        const localY = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+        const localX = Math.max(
+          0,
+          Math.min(rect.width, event.clientX - rect.left),
+        );
+        const localY = Math.max(
+          0,
+          Math.min(rect.height, event.clientY - rect.top),
+        );
         setOrigin({
           x: localX,
           y: localY,
@@ -95,7 +109,7 @@ export default function MagneticButton({
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", reset);
     };
-  }, [springX, springY, x, y]);
+  }, [springX, springY, x, y, isAccessOpen, reducedMotion]);
 
   return (
     <motion.div
@@ -155,6 +169,9 @@ export default function MagneticButton({
             </label>
             <input
               ref={inputRef}
+              autoFocus
+              required
+              maxLength={64}
               id="access-code"
               name="access-code"
               type="password"
@@ -163,7 +180,7 @@ export default function MagneticButton({
               placeholder="••••••"
               aria-describedby="access-note"
             />
-            <button type="submit" aria-label="Code senden" disabled>
+            <button type="submit" aria-label="Code senden">
               <span aria-hidden="true">→</span>
             </button>
           </motion.form>

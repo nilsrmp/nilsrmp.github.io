@@ -152,9 +152,9 @@ button {
   border-radius: 50%;
   background: #171717;
   color: #ffffff;
-  cursor: not-allowed;
+  cursor: pointer;
   font-size: 19px;
-  opacity: 0.3;
+  transition: box-shadow 0.2s;
 }
 
 .access-note {
@@ -193,3 +193,6 @@ button {
     flex-basis: 48px;
   }
 }
+
+.access-form button:hover{box-shadow:0 0 20px #8a7fba55}
+.access-note.access-error{color:#a24555}
